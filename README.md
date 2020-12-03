@@ -1,24 +1,66 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column          | Type   | Options   |
+| --------------- | ------ | --------- |
+| name            | string | not null  |
+| password        | string | not null  |
+| email           | string | not null  |
+| last_name       | string | not null  |
+| first_name      | string | not null  |
+| last_name_kana  | string | not null  |
+| first_name_kana | string | not null  |
+| birthday        | string | not null  |
 
-* Ruby version
+### Association
+- has_many   :items
+- has_many   :shipping_infos
+- belongs_to :buy_item
 
-* System dependencies
+### items テーブル
 
-* Configuration
+| Column     | Type       | Options            |
+| ---------- | ---------- | ------------------ |
+| item_name  | string     | not null           |
+| info       | text       | not null           |
+| category   | text       | not null           |
+| status     | text       | not null           |
+| shipping   | text       | not null           |
+| ship_area  | string     | not null           |
+| ship_day   | string     | not null           |
+| price      | integer    | not null           |
+| user_id    | references |  foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to :user
+- has_many   :buy_items
 
-* Database initialization
+### buy_items テーブル
+| Column     | Type       | Options           |
+| ---------- | ---------- | ----------------- |
+| card_num   | integer    | not null          |
+| card_month | integer    | not null          |
+| card_year  | integer    | not null          |
+| card_cvc   | integer    | not null          |
+| user_id    | references | foreign_key: true |
+| item_id    | references | foreign_key: true |
 
-* How to run the test suite
+### Association
+- belongs_to :item
+- belongs_to :shipping_info
 
-* Services (job queues, cache servers, search engines, etc.)
+### shipping_info テーブル
+| Column     | Type       | Options           |
+| ---------- | ---------- | ----------------- |
+| post_num   | integer    | not null          |
+| prefecture | string     | not null          |
+| city       | string     | not null          |
+| address    | text       | not null          |
+| building   | text       |                   |
+| phone_num  | integer    | not null          |
+| user_id    | references | foreign_key: true |
 
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :user
+- belongs_to :buy_item
