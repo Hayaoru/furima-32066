@@ -11,56 +11,51 @@
 | first_name      | string | not null  |
 | last_name_kana  | string | not null  |
 | first_name_kana | string | not null  |
-| birthday        | string | not null  |
+| birthday        | date   | not null  |
 
 ### Association
-- has_many   :items
-- has_many   :shipping_infos
-- belongs_to :buy_item
+- has_many :items
+- has_many :buy_items
 
 ### items テーブル
 
-| Column     | Type       | Options            |
-| ---------- | ---------- | ------------------ |
-| item_name  | string     | not null           |
-| info       | text       | not null           |
-| category   | text       | not null           |
-| status     | text       | not null           |
-| shipping   | text       | not null           |
-| ship_area  | string     | not null           |
-| ship_day   | string     | not null           |
-| price      | integer    | not null           |
-| user_id    | references |  foreign_key: true |
+| Column       | Type       | Options            |
+| ------------ | ---------- | ------------------ |
+| item_name    | string     | not null           |
+| info         | text       | not null           |
+| category_id  | integer    | not null           |
+| status_id    | integer    | not null           |
+| shipping_id  | integer    | not null           |
+| ship_area_id | integer    | not null           |
+| ship_day_id  | integer    | not null           |
+| price        | integer    | not null           |
+| user         | references | foreign_key: true  |
 
 ### Association
 - belongs_to :user
-- has_many   :buy_items
+- has_one    :buy_item
 
 ### buy_items テーブル
 | Column     | Type       | Options           |
 | ---------- | ---------- | ----------------- |
-| card_num   | integer    | not null          |
-| card_month | integer    | not null          |
-| card_year  | integer    | not null          |
-| card_cvc   | integer    | not null          |
-| user_id    | references | foreign_key: true |
-| item_id    | references | foreign_key: true |
+| user       | references | foreign_key: true |
+| item       | references | foreign_key: true |
 
 ### Association
 - belongs_to :item
-- belongs_to :shipping_info
+- has_one    :shipping_info
+- belongs_to :user
 
 ### shipping_info テーブル
-| Column     | Type       | Options           |
-| ---------- | ---------- | ----------------- |
-| post_num   | integer    | not null          |
-| prefecture | string     | not null          |
-| city       | string     | not null          |
-| address    | text       | not null          |
-| building   | text       |                   |
-| phone_num  | integer    | not null          |
-| user_id    | references | foreign_key: true |
+| Column        | Type       | Options           |
+| ------------- | ---------- | ----------------- |
+| post_num      | string     | not null          |
+| prefecture_id | integer    | not null          |
+| city          | string     | not null          |
+| address       | string     | not null          |
+| building      | string     |                   |
+| phone_num     | string     | not null          |
+| buy_item   | references | foreign_key: true |
 
 ### Association
-- belongs_to :user
 - belongs_to :buy_item
