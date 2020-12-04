@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column          | Type   | Options   |
-| --------------- | ------ | --------- |
-| name            | string | not null  |
-| password        | string | not null  |
-| email           | string | not null  |
-| last_name       | string | not null  |
-| first_name      | string | not null  |
-| last_name_kana  | string | not null  |
-| first_name_kana | string | not null  |
-| birthday        | date   | not null  |
+| Column             | Type   | Options   |
+| ------------------ | ------ | --------- |
+| name               | string | not null  |
+| encrypted_password | string | not null  |
+| email              | string | not null  |
+| last_name          | string | not null  |
+| first_name         | string | not null  |
+| last_name_kana     | string | not null  |
+| first_name_kana    | string | not null  |
+| birthday           | date   | not null  |
 
 ### Association
 - has_many :items
@@ -19,17 +19,17 @@
 
 ### items テーブル
 
-| Column       | Type       | Options            |
-| ------------ | ---------- | ------------------ |
-| item_name    | string     | not null           |
-| info         | text       | not null           |
-| category_id  | integer    | not null           |
-| status_id    | integer    | not null           |
-| shipping_id  | integer    | not null           |
-| ship_area_id | integer    | not null           |
-| ship_day_id  | integer    | not null           |
-| price        | integer    | not null           |
-| user         | references | foreign_key: true  |
+| Column        | Type       | Options            |
+| ------------- | ---------- | ------------------ |
+| item_name     | string     | not null           |
+| info          | text       | not null           |
+| category_id   | integer    | not null           |
+| status_id     | integer    | not null           |
+| ship_value_id | integer    | not null           |
+| ship_area_id  | integer    | not null           |
+| ship_day_id   | integer    | not null           |
+| price         | integer    | not null           |
+| user          | references | foreign_key: true  |
 
 ### Association
 - belongs_to :user
@@ -55,7 +55,7 @@
 | address       | string     | not null          |
 | building      | string     |                   |
 | phone_num     | string     | not null          |
-| buy_item   | references | foreign_key: true |
+| buy_item      | references | foreign_key: true |
 
 ### Association
 - belongs_to :buy_item
