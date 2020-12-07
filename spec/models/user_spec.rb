@@ -6,12 +6,17 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
+    it "正常に新規登録できる" do
+      @user.valid?
+      expect(@user).to be_valid
+    end
+
     it "nameが空だと登録できない" do
       @user.name = ""
       @user.valid?
        expect(@user.errors.full_messages).to include("Name can't be blank")
     end
-
+    
     it "emailが空だと登録できない" do
       @user.email = ""
       @user.valid?
@@ -38,6 +43,18 @@ RSpec.describe User, type: :model do
        expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
+    it "passwordが半角数字のみだと登録できない" do
+      @user.password = "777777777776"
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+
+    it "passwordが半角英字のみだと登録できない" do
+      @user.password = "qwertyuiopasdfg"
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+
     it "passwordが6文字より少ないと登録できない" do
       @user.password = Faker::Internet.password(min_length:5,max_length: 5)
       @user.password_confirmation = @user.password
@@ -45,7 +62,7 @@ RSpec.describe User, type: :model do
        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
 
-    it "passwordを2回入力しないと登録できない" do
+    it "passwordとpassword_confirmationは値が同じでないと登録出来ない" do
       @user.password_confirmation = Faker::Internet.password(min_length: 6)
       @user.valid?
        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
@@ -75,14 +92,26 @@ RSpec.describe User, type: :model do
        expect(@user.errors.full_messages).to include("First name kana can't be blank", "First name kana is invalid")
     end
 
-    it "first_nameが半角だと登録できない" do
+    it "first_nameが半角英字のみだと登録できない" do
       @user.first_name="a"
       @user.valid?
        expect(@user.errors.full_messages).to include("First name is invalid")
     end
 
-    it "last_nameが半角だと登録できない" do
+    it "last_nameが半角英字のみだと登録できない" do
       @user.last_name="a"
+      @user.valid?
+       expect(@user.errors.full_messages).to include("Last name is invalid")
+    end
+
+    it "first_nameが半角数字のみだと登録できない" do
+      @user.first_name="1"
+      @user.valid?
+       expect(@user.errors.full_messages).to include("First name is invalid")
+    end
+
+    it "last_nameが半角数字のみだと登録できない" do
+      @user.last_name="2"
       @user.valid?
        expect(@user.errors.full_messages).to include("Last name is invalid")
     end
