@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     it "正常に新規登録できる" do
-      binding.pry
       @user.valid?
       expect(@user).to be_valid
     end
@@ -45,7 +44,7 @@ RSpec.describe User, type: :model do
     end
 
     it "passwordが半角数字のみだと登録できない" do
-      @user.password = "777777777776"
+      @user.password = 777777777776
       @user.valid?
        expect(@user.errors.full_messages).to include("Password is invalid")
     end
@@ -106,13 +105,13 @@ RSpec.describe User, type: :model do
     end
 
     it "first_nameが半角数字のみだと登録できない" do
-      @user.first_name="1"
+      @user.first_name=1
       @user.valid?
        expect(@user.errors.full_messages).to include("First name is invalid")
     end
 
     it "last_nameが半角数字のみだと登録できない" do
-      @user.last_name="2"
+      @user.last_name=2
       @user.valid?
        expect(@user.errors.full_messages).to include("Last name is invalid")
     end
