@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     it "正常に新規登録できる" do
+      binding.pry
       @user.valid?
       expect(@user).to be_valid
     end
