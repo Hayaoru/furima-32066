@@ -43,10 +43,10 @@
 
 ### Association
 - belongs_to :item
-- has_one    :shipping_info
+- has_one    :order
 - belongs_to :user
 
-### shipping_info テーブル
+### orders テーブル
 | Column        | Type       | Options           |
 | ------------- | ---------- | ----------------- |
 | post_num      | string     | not null          |
