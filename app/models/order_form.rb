@@ -3,7 +3,7 @@ class OrderForm
   attr_accessor :post_num,:prefecture_id,:city,:address,:building,:phone_num,:item_id,:user_id,:token
 
   with_options presence: true do
-    validates :token,:city,:address,:phone_num
+    validates :token,:city,:address,:phone_num,:user_id,:item_id
     validates :post_num, format: { with: /\A\d{3}[-]\d{4}\z/}
     validates :phone_num, format: { with: /\A\d{11}\z/}
     validates :prefecture_id, numericality: { other_than: 1 }
