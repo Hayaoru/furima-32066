@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_item,only:[:index,:create]
 
   def index
-    if @item.user == current_user || @item.user != current_user && @item.order.present?
+    if @item.user == current_user || @item.user != current_user && @item.buy_item.present?
       redirect_to root_path
     end
     @order_form=OrderForm.new
