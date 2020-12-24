@@ -8,6 +8,6 @@ FactoryBot.define do
     building        {'栄ビル201'}
     phone_num       {'09011113333'}
     item_id         {1}
-    user_id          {1}
+    user_id         {1}
   end
 end

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe OrderForm, type: :model do
   describe "購入情報が保存される" do
     before do
+      
       @order_form= FactoryBot.build(:order_form)
     end
 
@@ -25,7 +26,7 @@ RSpec.describe OrderForm, type: :model do
       end
 
       it "郵便番号にハイフンがない時" do
-        @order_form.post_num = 1234567
+        @order_form.post_num = '1234567'
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Post num is invalid")
       end
